@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummy-web-app
+  template:
+    metadata:
+      labels:
+        app: dummy-web-app
+    spec:
+      containers:
+      - name: webserver-simple
+        image: docker.io/kostiscodefresh/my-preview-app
+        ports:
+        - containerPort: 8080
+        env:
+        - name: GIT_BRANCH
+          value: "default_kustomize_branch"
+        - name: GIT_HASH
+          value: "default_kustomize_hash"          

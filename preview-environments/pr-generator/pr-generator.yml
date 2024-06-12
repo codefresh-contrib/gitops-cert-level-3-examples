@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: myapps
+  name: my-preview-apps
   namespace: argocd  
 spec:
   goTemplate: true
@@ -9,20 +9,20 @@ spec:
   generators:
   - pullRequest:
       github:
-        owner: kostis-codefresh
-        repo: preview-env-source-code
+        owner: codefresh-contrib
+        repo: gitops-cert-level-3-examples
       requeueAfterSeconds: 180
   template:
     metadata:
       name: 'myapp-{{.branch}}'
     spec:
       source:
-        repoURL: 'https://github.com/kostis-codefresh/preview-env-manifests.git'
+        repoURL: 'https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git'
         targetRevision: HEAD
         path: kustomize-preview-app/ 
         kustomize:
           images:
-            - 'docker.io/kostiscodefresh/my-preview-app:{{.head_short_sha_7}}'
+            - 'docker.io/kostiscodefresh/my-preview-app:{{.branch_slug}}'
       project: "default"
       destination:
         server: https://kubernetes.default.svc

@@ -19,7 +19,7 @@ spec:
       source:
         repoURL: 'https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git'
         targetRevision: HEAD
-        path: kustomize-preview-app/ 
+        path: preview-environments/kustomize-preview-app/ 
         kustomize:
           images:
             - 'docker.io/kostiscodefresh/my-preview-app:{{.branch_slug}}'

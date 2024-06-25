@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: configmaps-example-preview
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: configmaps-example
   ports:
-    - name: http
+    - nodePort: 31001
       protocol: TCP
       port: 8080
-      targetPort: 8080
+      name: preview-port

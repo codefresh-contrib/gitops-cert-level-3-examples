@@ -1,0 +1,110 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-example-rollout
+spec:
+  replicas: 3
+  strategy:
+    blueGreen: 
+      # activeService specifies the service to update with the new template hash at time of promotion.
+      # This field is mandatory for the blueGreen update strategy.    
+      activeService: configmaps-example-active
+      # previewService specifies the service to update with the new template hash before promotion.
+      # This allows the preview stack to be reachable without serving production traffic.
+      # This field is optional.      
+      previewService: configmaps-example-preview
+      # autoPromotionEnabled disables automated promotion of the new stack by pausing the rollout
+      # immediately before the promotion. If omitted, the default behavior is to promote the new
+      # stack as soon as the ReplicaSet are completely ready/available.
+      # Rollouts can be resumed using: `kubectl argo rollouts resume ROLLOUT`      
+      autoPromotionEnabled: false  
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: configmaps-example
+  template:
+    metadata:
+      labels:
+        app: configmaps-example
+    spec:
+      containers:
+      - name: my-container
+        image: docker.io/kostiscodefresh/configmaps-argo-rollouts-example:latest
+        env:
+        - name: APP_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: APP_VERSION
+        - name: ENV
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: ENV 
+        - name: ENV_TYPE
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: ENV_TYPE
+        - name: REGION
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: REGION
+        - name: PAYPAL_URL
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: PAYPAL_URL
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: DB_PASSWORD
+        - name: GPU_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: GPU_ENABLED
+        - name: UI_THEME
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: UI_THEME
+        - name: CACHE_SIZE
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: CACHE_SIZE
+        - name: PAGE_LIMIT
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: PAGE_LIMIT
+        - name: SORTING
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: SORTING
+        - name: N_BUCKETS
+          valueFrom:
+            configMapKeyRef:
+              name: my-settings
+              key: N_BUCKETS                                                                                                                                            
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080    

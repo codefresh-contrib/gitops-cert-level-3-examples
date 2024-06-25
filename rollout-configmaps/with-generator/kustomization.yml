@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# declare ConfigMap as a resource
+resources:
+- example-rollout.yml
+- service-active.yml
+- service-preview.yml
+
+configurations:
+  - https://argoproj.github.io/argo-rollouts/features/kustomize/rollout-transform.yaml
+
+# declare ConfigMap from a ConfigMapGenerator
+configMapGenerator:
+- name: my-settings
+  literals: 
+  - APP_VERSION=1.0
+  - ENV="asia-staging" 
+  - ENV_TYPE="non-prod" 
+  - REGION="asia" 
+  - PAYPAL_URL="staging2.paypal.com"     
+  - DB_USER="non-prod-user" 
+  - DB_PASSWORD="non-prod-password" 
+  - GPU_ENABLED="0" 
+  - UI_THEME="light" 
+  - CACHE_SIZE="2048kb" 
+  - PAGE_LIMIT="25" 
+  - SORTING="ascending" 
+  - N_BUCKETS="42"   

@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: my-container
-        image: docker.io/kostiscodefresh/configmaps-argo-rollouts-example:latest
+        image: docker.io/kostiscodefresh/configmaps-argo-rollouts-example:1.0
         env:
         - name: APP_VERSION
           valueFrom:

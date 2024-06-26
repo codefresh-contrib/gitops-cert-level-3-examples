@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: my-smart-rollout-active
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: my-smart-rollout
   ports:
-    - name: http
+    - nodePort: 31000
       protocol: TCP
       port: 8080
-      targetPort: 8080
+      name: active-port

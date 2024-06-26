@@ -6,6 +6,9 @@ resources:
 - service-active.yml
 - service-preview.yml
 
+configurations:
+  - https://argoproj.github.io/argo-rollouts/features/kustomize/rollout-transform.yaml
+
 # declare ConfigMap from a ConfigMapGenerator
 configMapGenerator:
 - name: my-settings

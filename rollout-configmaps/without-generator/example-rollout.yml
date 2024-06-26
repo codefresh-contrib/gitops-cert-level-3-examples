@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: my-example-rollout
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     blueGreen: 
       # activeService specifies the service to update with the new template hash at time of promotion.
@@ -18,7 +18,7 @@ spec:
       # stack as soon as the ReplicaSet are completely ready/available.
       # Rollouts can be resumed using: `kubectl argo rollouts resume ROLLOUT`      
       autoPromotionEnabled: false  
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: configmaps-example

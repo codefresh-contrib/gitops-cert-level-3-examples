@@ -36,8 +36,7 @@ spec:
           value: "1.0"
         volumeMounts:
           - name: config-volume
-            mountPath: /etc/podinfo 
-            subPath: labels         
+            mountPath: /etc/podinfo     
         ports:
         - name: http
           containerPort: 8080
@@ -54,4 +53,7 @@ spec:
         - name: config-volume
           configMap:
             name: special-config
+            items:
+            - key: "labels"
+              path: "labels"
 

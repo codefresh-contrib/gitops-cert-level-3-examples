@@ -16,5 +16,9 @@ spec:
       containers:
       - name: gui-tester
         image: docker.io/kostiscodefresh/tester:latest
+        env:
+        - name: RABBIT_HOST
+          value: "rabbitmq" ## same name as rabbitMQ service
+      
         ports:
         - containerPort: 7000

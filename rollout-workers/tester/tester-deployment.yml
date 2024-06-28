@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-tester
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tester
+  template:
+    metadata:
+      labels:
+        app: tester
+    spec:
+      containers:
+      - name: gui-tester
+        image: docker.io/kostiscodefresh/tester:latest
+        ports:
+        - containerPort: 7000

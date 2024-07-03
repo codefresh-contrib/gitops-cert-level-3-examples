@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-settings
+data:
+  labels: |
+    backendHost="backend-active"
+    backendPort="8080"
+    role="active"

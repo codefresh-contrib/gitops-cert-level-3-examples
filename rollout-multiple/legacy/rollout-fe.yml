@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-legacy-frontend
+spec:
+  replicas: 2
+  strategy:
+    blueGreen: 
+      # activeService specifies the service to update with the new template hash at time of promotion.
+      # This field is mandatory for the blueGreen update strategy.    
+      activeService: frontend-active
+      # previewService specifies the service to update with the new template hash before promotion.
+      # This allows the preview stack to be reachable without serving production traffic.
+      # This field is optional.      
+      previewService: frontend-preview
+      # autoPromotionEnabled disables automated promotion of the new stack by pausing the rollout
+      # immediately before the promotion. If omitted, the default behavior is to promote the new
+      # stack as soon as the ReplicaSet are completely ready/available.
+      # Rollouts can be resumed using: `kubectl argo rollouts resume ROLLOUT`      
+      autoPromotionEnabled: false
+      activeMetadata:
+        labels:
+          backendHost: backend-active
+          backendPort: "8080"
+          role: active
+      previewMetadata:
+        labels:
+          backendHost: backend-preview
+          backendPort: "8080"
+          role: preview
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: loan
+  template:
+    metadata:
+      labels:
+        app: loan
+    spec:
+      containers:
+      - name: my-frontend-container
+        image: docker.io/kostiscodefresh/loan:latest
+        imagePullPolicy: Always
+        env:
+        - name: APP_VERSION
+          value: "1.0"        
+        volumeMounts:
+          - name: podinfo
+            mountPath: /etc/podinfo           
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080    
+      volumes:
+        - name: podinfo
+          downwardAPI:
+            items:
+              - path: "labels"
+                fieldRef:
+                  fieldPath: metadata.labels

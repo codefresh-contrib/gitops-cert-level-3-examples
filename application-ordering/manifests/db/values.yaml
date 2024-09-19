@@ -1,0 +1,6 @@
+mariadb:
+  architecture: "standalone"
+  auth:
+    database: "demo"
+    username: "demo"
+    password: "demo"

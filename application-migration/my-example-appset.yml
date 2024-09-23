@@ -1,9 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: my-qa-appset
+  name: my-example-appset
   namespace: argocd
 spec:
+#  syncPolicy:
+#    preserveResourcesOnDeletion: true
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
@@ -32,7 +34,6 @@ spec:
 
       # Sync policy
       syncPolicy:
-        # preserveResourcesOnDeletion: false 
         syncOptions:
           - CreateNamespace=true  
         automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.

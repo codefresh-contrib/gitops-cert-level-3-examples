@@ -11,17 +11,17 @@ spec:
     server: https://kubernetes.default.svc
     namespace: staging-eu
   sources:
-    - repoURL: https://github.com/kostis-codefresh/multi-sources-example.git
-      path: my-chart
+    - repoURL: https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git
+      path: helm-multi-source/my-chart
       targetRevision: HEAD
       helm:
         valueFiles:
-        - $values/my-values/common-values.yaml          
-        - $values/my-values/app-version/staging-values.yaml               
-        - $values/my-values/env-type/non-prod-values.yaml  
-        - $values/my-values/regions/eu-values.yaml                
-        - $values/my-values/envs/staging-eu-values.yaml
-    - repoURL: 'https://github.com/kostis-codefresh/multi-sources-example.git'
+        - $values/helm-multi-source/my-values/common-values.yaml          
+        - $values/helm-multi-source/my-values/app-version/staging-values.yaml               
+        - $values/helm-multi-source/my-values/env-type/non-prod-values.yaml  
+        - $values/helm-multi-source/my-values/regions/eu-values.yaml                
+        - $values/helm-multi-source/my-values/envs/staging-eu-values.yaml
+    - repoURL: 'https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git'
       targetRevision: HEAD
       ref: values
   syncPolicy:

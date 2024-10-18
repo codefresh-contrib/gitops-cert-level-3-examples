@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-us-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io    
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod-us
+  sources:
+    - repoURL: https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git
+      path: helm-multi-source/my-chart
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+        - $values/helm-multi-source/my-values/common-values.yaml          
+        - $values/helm-multi-source/my-values/app-version/prod-values.yaml               
+        - $values/helm-multi-source/my-values/env-type/prod-values.yaml  
+        - $values/helm-multi-source/my-values/regions/us-values.yaml                
+        - $values/helm-multi-source/my-values/envs/prod-us-values.yaml
+    - repoURL: 'https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git'
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  
+    automated: 
+      prune: true
+      selfHeal: true

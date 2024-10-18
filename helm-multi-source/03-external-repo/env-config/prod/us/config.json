@@ -1,0 +1,7 @@
+{
+    "env": "prod-us",
+    "region": "us",
+    "type": "prod",
+    "version": "prod",
+    "chart": "0.1.0"
+  }

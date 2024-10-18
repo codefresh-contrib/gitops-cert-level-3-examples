@@ -1,0 +1,7 @@
+{
+    "env": "integration-gpu",
+    "region": "us",
+    "type": "non-prod",
+    "version": "prod",
+    "chart": "0.1.0"
+  }

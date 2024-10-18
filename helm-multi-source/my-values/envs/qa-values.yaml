@@ -1,0 +1,10 @@
+# Environment settings
+environment: qa
+
+# Application settings
+userInterfaceTheme: "dark"
+cacheSize: "1024kb"
+gpuEnabled: "1"
+pageLimit: "25"
+sorting: "ascending"
+nBuckets: "42"

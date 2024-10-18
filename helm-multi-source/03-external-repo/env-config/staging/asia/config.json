@@ -1,0 +1,7 @@
+{
+    "env": "qa",
+    "region": "us",
+    "type": "non-prod",
+    "version": "qa",
+    "chart": "0.2.0"
+  }

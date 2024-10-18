@@ -1,0 +1,27 @@
+# Default values for my-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Kubernetes settings
+replicaCount: 1
+
+# Application image version
+imageVersion: "1.0"
+
+# Environment settings
+environment: dev
+environmentType: non-prod
+region: dev
+paypalUrl: "http://example.com"
+dbUser: "empty"
+dbPassword: "empty"
+
+
+
+# Application settings
+userInterfaceTheme: "light"
+cacheSize: "1024kb"
+gpuEnabled: "0"
+pageLimit: "50"
+sorting: "Ascending"
+nBuckets: "42"

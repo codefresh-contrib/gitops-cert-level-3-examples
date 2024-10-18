@@ -1,0 +1,7 @@
+{
+    "env": "staging-us",
+    "region": "us",
+    "type": "non-prod",
+    "version": "staging",
+    "chart": "0.2.0"
+  }

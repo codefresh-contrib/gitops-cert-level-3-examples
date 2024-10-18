@@ -1,0 +1,10 @@
+# Environment settings
+environment: integration-gpu
+
+# Application settings
+userInterfaceTheme: "light"
+cacheSize: "1024kb"
+gpuEnabled: "1"
+pageLimit: "50"
+sorting: "Ascending"
+nBuckets: "42"

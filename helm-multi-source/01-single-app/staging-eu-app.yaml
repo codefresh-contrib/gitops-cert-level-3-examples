@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: staging-eu-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io    
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging-eu
+  sources:
+    - repoURL: https://github.com/kostis-codefresh/multi-sources-example.git
+      path: my-chart
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+        - $values/my-values/common-values.yaml          
+        - $values/my-values/app-version/staging-values.yaml               
+        - $values/my-values/env-type/non-prod-values.yaml  
+        - $values/my-values/regions/eu-values.yaml                
+        - $values/my-values/envs/staging-eu-values.yaml
+    - repoURL: 'https://github.com/kostis-codefresh/multi-sources-example.git'
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  
+    automated: 
+      prune: true
+      selfHeal: true

@@ -1,0 +1,10 @@
+# Environment settings
+environment: integration-non-gpu
+
+# Application settings
+userInterfaceTheme: "dark"
+cacheSize: "1024kb"
+gpuEnabled: "0"
+pageLimit: "50"
+sorting: "descending"
+nBuckets: "48"

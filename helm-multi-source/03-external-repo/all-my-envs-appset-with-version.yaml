@@ -11,7 +11,7 @@ spec:
       repoURL: https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git
       revision: HEAD
       files:
-      - path: "helm-multi-source/03-external-config/env-config/**/config.json"       
+      - path: "helm-multi-source/03-external-repo/env-config/**/config.json"       
   template:      
     metadata:
       name: '{{.env}}' 
@@ -25,11 +25,11 @@ spec:
           targetRevision: '{{.chart}}'
           helm:
             valueFiles:
-            - $values/my-values/common-values.yaml          
-            - $values/my-values/app-version/{{.version}}-values.yaml               
-            - $values/my-values/env-type/{{.type}}-values.yaml  
-            - $values/my-values/regions/{{.region}}-values.yaml                
-            - $values/my-values/envs/{{.env}}-values.yaml
+            - $values/helm-multi-source/my-values/common-values.yaml          
+            - $values/helm-multi-source/my-values/app-version/{{.version}}-values.yaml               
+            - $values/helm-multi-source/my-values/env-type/{{.type}}-values.yaml  
+            - $values/helm-multi-source/my-values/regions/{{.region}}-values.yaml                
+            - $values/helm-multi-source/my-values/envs/{{.env}}-values.yaml
         - repoURL: 'https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git'
           targetRevision: HEAD
           ref: values

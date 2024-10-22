@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: all-my-envs
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git
+      revision: solution-helm-values
+      files:
+      - path: "helm-multi-source/03-external-repo/env-config/**/config.json"       
+  template:      
+    metadata:
+      name: '{{.env}}' 
+    spec:
+      # The project the application belongs to.
+      project: default
+
+      sources:
+        - repoURL: https://kostis-codefresh.github.io/multi-sources-example
+          chart: my-chart
+          targetRevision: '{{.chart}}'
+          helm:
+            valueFiles:
+            - $values/helm-multi-source/my-values/common-values.yaml          
+            - $values/helm-multi-source/my-values/app-version/{{.version}}-values.yaml               
+            - $values/helm-multi-source/my-values/env-type/{{.type}}-values.yaml  
+            - $values/helm-multi-source/my-values/regions/{{.region}}-values.yaml                
+            - $values/helm-multi-source/my-values/envs/{{.env}}-values.yaml
+        - repoURL: 'https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git'
+          targetRevision: solution-helm-values
+          ref: values
+      
+      # Destination cluster and namespace to deploy the application
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.env}}'
+
+      # Sync policy
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true  
+        automated: 
+          prune: true 
+          selfHeal: true 
+    

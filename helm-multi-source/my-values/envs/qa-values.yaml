@@ -3,7 +3,7 @@ environment: qa
 
 # Application settings
 userInterfaceTheme: "dark"
-cacheSize: "1024kb"
+cacheSize: "8192kb"
 gpuEnabled: "1"
 pageLimit: "25"
 sorting: "ascending"

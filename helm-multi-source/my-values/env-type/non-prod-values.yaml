@@ -3,7 +3,7 @@ replicaCount: 3
 
 # Environment settings
 environmentType: non-prod
-paypalUrl: "staging2.paypal.com"
+paypalUrl: "preprod.paypal.com"
 dbUser: "non-prod-user"
 dbPassword: "non-prod-password"
 

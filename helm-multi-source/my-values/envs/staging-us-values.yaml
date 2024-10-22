@@ -5,7 +5,7 @@ replicaCount: 3
 environment: staging-us
 
 # Application settings
-userInterfaceTheme: "light"
+userInterfaceTheme: "dark"
 cacheSize: "1024kb"
 gpuEnabled: "1"
 pageLimit: "25"

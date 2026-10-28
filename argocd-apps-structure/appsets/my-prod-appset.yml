@@ -28,8 +28,8 @@ spec:
       
       # Destination cluster and namespace to deploy the application
       destination:
-        server: https://kubernetes.default.svc
         namespace: '{{index .path.segments 2}}-{{index .path.segments 4}}'
+        name: cluster-2
 
       # Sync policy
       syncPolicy:

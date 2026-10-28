@@ -10,7 +10,7 @@ spec:
       - name: webserver-simple
         env:
         - name: UI_THEME
-          value: "light"
+          value: "dark"
         - name: CACHE_SIZE
           value: "2048kb"
         - name: PAGE_LIMIT

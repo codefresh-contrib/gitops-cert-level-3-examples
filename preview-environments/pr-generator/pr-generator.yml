@@ -9,15 +9,17 @@ spec:
   generators:
   - pullRequest:
       github:
-        owner: codefresh-contrib
+        owner: admusin
         repo: gitops-cert-level-3-examples
+        labels:
+          - preview-ready
       requeueAfterSeconds: 180
   template:
     metadata:
       name: 'myapp-{{.branch}}'
     spec:
       source:
-        repoURL: 'https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git'
+        repoURL: 'https://github.com/admusin/gitops-cert-level-3-examples.git'
         targetRevision: HEAD
         path: preview-environments/kustomize-preview-app/ 
         kustomize:

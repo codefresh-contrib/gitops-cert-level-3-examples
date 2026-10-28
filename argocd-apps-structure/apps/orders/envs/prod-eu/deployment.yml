@@ -10,7 +10,7 @@ spec:
       - name: webserver-simple
         env:
         - name: ENV
-          value: "prod-us"
+          value: "prod-eu"
         - name: GPU_ENABLED
           value: "1"
       

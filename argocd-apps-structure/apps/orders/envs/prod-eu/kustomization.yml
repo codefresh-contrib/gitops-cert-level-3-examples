@@ -1,7 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-
 resources:
 - ../../base
 
@@ -9,6 +8,6 @@ resources:
 patchesStrategicMerge:
 - deployment.yml
 - version.yml
+- replicas.yml
 - settings.yml
-
 

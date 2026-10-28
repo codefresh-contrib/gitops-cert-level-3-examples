@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git
+      repoURL: https://github.com/admusin/gitops-cert-level-3-examples.git
       revision: HEAD
       directories:
       - path: argocd-apps-structure/apps/*/envs/prod-us
@@ -22,7 +22,7 @@ spec:
 
       # Source of the application manifests
       source:
-        repoURL: https://github.com/codefresh-contrib/gitops-cert-level-3-examples.git
+        repoURL: https://github.com/admusin/gitops-cert-level-3-examples.git
         targetRevision: HEAD
         path: '{{.path.path}}'
       
